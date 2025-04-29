@@ -1,0 +1,96 @@
+.employees {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .employees-form {
+    background-color: #f5f5f7;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .employees-form h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #1d1d1f;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .employees-list {
+    margin-top: 40px;
+  }
+  
+  .employees-list h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #1d1d1f;
+  }
+  
+  .employees-table {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-header {
+    display: flex;
+    background-color: #f5f5f7;
+    padding: 12px 20px;
+    font-weight: 500;
+    color: #1d1d1f;
+    font-size: 14px;
+  }
+  
+  .table-row {
+    display: flex;
+    padding: 15px 20px;
+    background-color: white;
+    border-bottom: 1px solid #f5f5f7;
+    transition: background-color 0.2s ease;
+  }
+  
+  .table-row:hover {
+    background-color: #fafafa;
+  }
+  
+  .table-row:last-child {
+    border-bottom: none;
+  }
+  
+  .table-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .role-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .role-badge.user {
+    background-color: #e9f5ff;
+    color: #0071e3;
+  }
+  
+  .role-badge.admin {
+    background-color: #f1f8e9;
+    color: #43a047;
+  }

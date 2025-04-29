@@ -1,0 +1,86 @@
+.scan-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .scan-result {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .status-icon {
+    margin-bottom: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .success-icon {
+    font-size: 60px;
+    color: #2ecc71;
+    animation: fadeIn 0.5s;
+  }
+  
+  .error-icon {
+    font-size: 60px;
+    color: #e74c3c;
+    animation: fadeIn 0.5s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .return-button {
+    margin-top: 25px;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .return-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Стили для разных статусов */
+  .scan-result.processing {
+    border-left: 5px solid #3498db;
+  }
+  
+  .scan-result.success {
+    border-left: 5px solid #2ecc71;
+  }
+  
+  .scan-result.error {
+    border-left: 5px solid #e74c3c;
+  }

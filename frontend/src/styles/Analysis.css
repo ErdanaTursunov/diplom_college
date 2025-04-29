@@ -1,0 +1,94 @@
+.analysis {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .filter-section {
+    margin-bottom: 30px;
+  }
+  
+  .filter-section select {
+    max-width: 300px;
+  }
+  
+  .hours-report {
+    background-color: #f5f5f7;
+    border-radius: 16px;
+    padding: 25px;
+  }
+  
+  .hours-report h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #1d1d1f;
+  }
+  
+  .employees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .employee-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+  }
+  
+  .employee-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .employee-info {
+    flex: 1;
+  }
+  
+  .employee-info h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #1d1d1f;
+  }
+  
+  .profession {
+    font-size: 14px;
+    color: #86868b;
+  }
+  
+  .hours-container {
+    display: flex;
+    align-items: center;
+    width: 50%;
+  }
+  
+  .hours-bar {
+    height: 8px;
+    background: linear-gradient(to right, #32d74b, #5ac8fa);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    margin-right: 15px;
+    flex: 1;
+  }
+  
+  .hours-count {
+    font-size: 16px;
+    font-weight: 500;
+    min-width: 50px;
+    text-align: right;
+    color: #1d1d1f;
+  }
+  
+  .no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 16px;
+    color: #86868b;
+  }

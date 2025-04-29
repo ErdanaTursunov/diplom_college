@@ -1,0 +1,910 @@
+/* employee-shifts.css - Современный дизайн в стиле Apple с поддержкой QR-сканера */
+
+/* Основные переменные */
+:root {
+    --primary-color: #0071e3;
+    --primary-hover: #0077ed;
+    --background-light: #f5f5f7;
+    --text-dark: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --card-active: #f2f9ff;
+    --badge-active: #34c759;
+    --badge-pending: #ff9500;
+    --badge-completed: #8e8e93;
+    --border-radius: 12px;
+    --header-height: 60px;
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+  
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+/* Страница смен сотрудника */
+.employee-shifts-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+  
+/* Шапка */
+.shifts-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    height: var(--header-height);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+  
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.shifts-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    height: min-content;
+}
+  
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+  
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+  
+/* Основной контент */
+.shifts-content {
+    flex: 1;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+  
+.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+  
+/* Слайдер смен */
+.shifts-slider-container {
+    margin-bottom: 32px;
+    position: relative;
+}
+  
+.shifts-slider {
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: visible;
+}
+  
+/* Стили карточки смены */
+.shift-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 24px;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+  
+.shift-card.active {
+    background-color: var(--card-active);
+    box-shadow: 0 4px 30px rgba(0, 113, 227, 0.15);
+    border: 1px solid rgba(0, 113, 227, 0.1);
+}
+  
+.shift-date {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+  
+.shift-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+.time-range {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+  
+/* Статус смены */
+.shift-status-badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+}
+  
+.shift-status-badge.active {
+    background-color: rgba(52, 199, 89, 0.12);
+    color: var(--badge-active);
+}
+  
+.shift-status-badge.pending {
+    background-color: rgba(255, 149, 0, 0.12);
+    color: var(--badge-pending);
+}
+  
+.shift-status-badge.completed {
+    background-color: rgba(142, 142, 147, 0.12);
+    color: var(--badge-completed);
+}
+  
+/* Детали смены */
+.shift-details {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+  
+.detail {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+  
+.detail-icon {
+    margin-right: 8px;
+    stroke: var(--text-secondary);
+}
+  
+/* Секция действий со сменой (QR или таймер) */
+.shift-action-section {
+    margin-top: 16px;
+}
+  
+/* QR-код и сканер */
+.qr-section {
+    background: linear-gradient(135deg, #f6f9fc 0%, #edf3f9 100%);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 32px;
+    text-align: center;
+}
+  
+.qr-prompt-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+}
+  
+.qr-icon {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+  
+.qr-prompt-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+    max-width: 300px;
+    line-height: 1.4;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.scan-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+  
+.scan-button:hover {
+    background-color: var(--primary-hover);
+}
+  
+.scan-button:active {
+    transform: scale(0.98);
+}
+  
+.qr-scanner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+  
+.qr-scanner {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+  
+.cancel-scan-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+  
+.cancel-scan-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+  
+/* Маркеры для QR-кода */
+.qr-scanner-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+  
+.qr-scanner-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: var(--primary-color);
+    border-style: solid;
+    border-width: 0;
+}
+  
+.qr-scanner-corner.top-left {
+    top: 20px;
+    left: 20px;
+    border-top-width: 3px;
+    border-left-width: 3px;
+}
+  
+.qr-scanner-corner.top-right {
+    top: 20px;
+    right: 20px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+}
+  
+.qr-scanner-corner.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+}
+  
+.qr-scanner-corner.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+}
+  
+/* Таймер */
+.timer-section {
+    margin-top: 8px;
+}
+  
+.timer-container {
+    background: linear-gradient(135deg, #f6f9fc 0%, #edf3f9 100%);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 32px;
+    text-align: center;
+}
+  
+.timer-progress {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+  
+.time-elapsed, .time-remaining {
+    flex: 1;
+    padding: 16px;
+}
+  
+.time-divider {
+    width: 1px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+  
+.timer-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+  
+.time-value {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+}
+  
+.time-elapsed .time-value {
+    color: var(--badge-active);
+}
+  
+.time-remaining .time-value {
+    color: var(--primary-color);
+}
+  
+/* Состояние без смен */
+.no-shifts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    text-align: center;
+}
+  
+.no-shifts-icon {
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+  
+.no-shifts-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+  
+.no-shifts-subtext {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+  
+/* Индикатор загрузки */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+  
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(0, 113, 227, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 16px;
+}
+  
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+  
+/* Анимация пульсации для QR и таймера */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 24px rgba(0, 113, 227, 0.05);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(0, 113, 227, 0.2);
+    }
+    100% {
+        box-shadow: 0 4px 24px rgba(0, 113, 227, 0.05);
+    }
+}
+  
+/* Анимация сканирования для QR */
+@keyframes scanLine {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(360px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+  
+.scan-line {
+    position: absolute;
+    width: calc(100% - 40px);
+    height: 2px;
+    background-color: rgba(0, 113, 227, 0.7);
+    top: 20px;
+    left: 20px;
+    animation: scanLine 3s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0, 113, 227, 0.5);
+}
+
+/* Навигация слайдера в стиле Apple */
+.swiper-button-next, 
+.swiper-button-prev {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.swiper-button-next:after, 
+.swiper-button-prev:after {
+    font-size: 18px;
+    color: var(--text-dark);
+}
+
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Пагинация в стиле Apple */
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    width: 20px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Медиа запросы для адаптивности */
+@media (max-width: 768px) {
+    .shifts-content {
+        padding: 16px;
+    }
+    
+    .shift-card {
+        padding: 16px;
+    }
+    
+    .timer-progress {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .time-divider {
+        width: 80px;
+        height: 1px;
+    }
+    
+    .qr-scanner {
+        height: 300px;
+    }
+    
+    .time-value {
+        font-size: 28px;
+    }
+    
+    .scan-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-light: #1a1a1c;
+        --text-dark: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --card-bg: #2c2c2e;
+        --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        --card-active: #113366;
+    }
+    
+    .shifts-header {
+        background-color: rgba(28, 28, 30, 0.85);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    
+    .shift-details {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .qr-section,
+    .timer-container {
+        background: linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%);
+    }
+    
+    .time-divider {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .swiper-button-next, 
+    .swiper-button-prev {
+        background-color: rgba(60, 60, 67, 0.8);
+    }
+    
+    .swiper-button-next:after, 
+    .swiper-button-prev:after {
+        color: var(--text-dark);
+    }
+    
+    .swiper-pagination-bullet {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .spinner {
+        border-color: rgba(0, 113, 227, 0.3);
+    }
+}
+
+/* Анимации для более живого интерфейса в стиле Apple */
+.shift-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.qr-section, .timer-container {
+    animation: pulse 4s infinite;
+}
+
+/* Стилизация фокуса элементов управления */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Улучшение доступности */
+@media (prefers-reduced-motion: reduce) {
+    .qr-section,
+    .timer-container {
+        animation: none;
+    }
+    
+    .spinner {
+        animation-duration: 2s;
+    }
+    
+    .scan-line {
+        animation: none;
+        display: none;
+    }
+    
+    .shift-card:hover {
+        transform: none;
+    }
+}
+
+/* Стили для уведомлений */
+.notifications-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    color: var(--text-dark);
+    padding: 8px;
+    margin-right: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notifications-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff3b30;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.notifications-panel {
+    position: absolute;
+    top: var(--header-height);
+    right: 20px;
+    width: 350px;
+    max-height: 0;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 90;
+}
+
+.notifications-panel.active {
+    max-height: 500px;
+    opacity: 1;
+    overflow-y: auto;
+}
+
+.notifications-header {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notifications-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.mark-all-read-button {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.notifications-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: flex-start;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification-item.unread {
+    background-color: rgba(0, 113, 227, 0.05);
+}
+
+.notification-icon-container {
+    position: relative;
+    margin-right: 12px;
+}
+
+.notification-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-icon.schedule {
+    background-color: rgba(0, 113, 227, 0.1);
+    color: var(--primary-color);
+}
+
+.notification-unread-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+}
+
+.notification-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.notification-time {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.notification-message {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.notification-mark-read {
+    background: transparent;
+    border: none;
+    color: var(--badge-active);
+    padding: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.notification-item:hover .notification-mark-read {
+    opacity: 1;
+}
+
+.no-notifications {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.notifications-loading {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notifications-loading .spinner {
+    margin-bottom: 12px;
+}
+
+/* Logout button */
+.logout-button {
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-dark);
+    border-radius: 100px;
+    padding: 6px 12px;
+    margin-left: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* QR code container styles */
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.qr-code {
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.qr-instructions {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: var(--text-dark);
+    max-width: 300px;
+    text-align: center;
+}
+
+.test-scan-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.test-scan-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Dark mode adjustments for new elements */
+@media (prefers-color-scheme: dark) {
+    .notification-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .notification-item:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .notification-item.unread {
+        background-color: rgba(0, 113, 227, 0.15);
+    }
+    
+    .notifications-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .logout-button {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-dark);
+    }
+    
+    .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .qr-code {
+        background-color: #333;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+}
