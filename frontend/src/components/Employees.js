@@ -1,39 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/Employees.css';
+import React, { useEffect, useState } from "react";
+import "../styles/Employees.css";
 import axios from "axios";
 
 function Employees() {
   const [employees, setEmployees] = useState([]);
 
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    role: 'user',
-    position: ''
+    fullName: "",
+    email: "",
+    password: "",
+    role: "user",
+    position: "",
   });
 
-  const positions = ['Бариста', 'Повар', 'Официант', 'Менеджер', 'Кассир'];
-  const roles = ['user', 'admin'];
+  const positions = ["Бариста", "Повар", "Официант", "Менеджер", "Кассир"];
+  const roles = ["user", "admin"];
 
   // Вынесенная функция для загрузки сотрудников
   const fetchEmployees = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:4000/api/users', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       if (!response.ok) {
-        throw new Error('Ошибка при загрузке сотрудников');
+        throw new Error("Ошибка при загрузке сотрудников");
       }
 
       const data = await response.json();
       setEmployees(data);
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
 
@@ -43,56 +46,58 @@ function Employees() {
 
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       await axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      setEmployees(provData => provData.filter(user => user.id !== id))
-
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setEmployees((provData) => provData.filter((user) => user.id !== id));
     } catch (error) {
-      alert("Произошло ошибка при удаления пользователя")
+      alert("Произошло ошибка при удаления пользователя");
     }
-  }
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const newEmployee = { ...formData };
 
     try {
-      const response = await fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newEmployee),
         },
-        body: JSON.stringify(newEmployee)
-      });
+      );
 
       if (!response.ok) {
-        throw new Error('Ошибка при регистрации сотрудника');
+        throw new Error("Ошибка при регистрации сотрудника");
       }
 
       await fetchEmployees(); // Обновляем список после регистрации
 
       // Сброс формы
       setFormData({
-        fullName: '',
-        email: '',
-        password: '',
-        role: 'user',
-        position: ''
+        fullName: "",
+        email: "",
+        password: "",
+        role: "user",
+        position: "",
       });
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   };
 
@@ -148,9 +153,9 @@ function Employees() {
                 onChange={handleInputChange}
                 required
               >
-                {roles.map(role => (
+                {roles.map((role) => (
                   <option key={role} value={role}>
-                    {role === 'user' ? 'Пользователь' : 'Администратор'}
+                    {role === "user" ? "Пользователь" : "Администратор"}
                   </option>
                 ))}
               </select>
@@ -165,8 +170,10 @@ function Employees() {
                 required
               >
                 <option value="">Выберите должность</option>
-                {positions.map(pos => (
-                  <option key={pos} value={pos}>{pos}</option>
+                {positions.map((pos) => (
+                  <option key={pos} value={pos}>
+                    {pos}
+                  </option>
                 ))}
               </select>
             </div>
@@ -186,14 +193,14 @@ function Employees() {
             <div className="table-cell">Роль</div>
           </div>
 
-          {employees.map(employee => (
+          {employees.map((employee) => (
             <div className="table-row" key={employee.id}>
               <div className="table-cell">{employee.fullName}</div>
               <div className="table-cell">{employee.email}</div>
               <div className="table-cell">{employee.position}</div>
               <div className="table-cell">
                 <span className={`role-badge ${employee.role}`}>
-                  {employee.role === 'user' ? 'Пользователь' : 'Администратор'}
+                  {employee.role === "user" ? "Пользователь" : "Администратор"}
                 </span>
               </div>
               <button onClick={() => handleDelete(employee.id)}>х</button>
